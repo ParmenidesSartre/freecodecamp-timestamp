@@ -30,7 +30,7 @@ app.get('/api/:date?', function (req, res) {
     const date = new Date(
       isNaN(req.params.date) ? req.params.date : parseInt(req.params.date),
     )
-    if (Date.parse(req.params.date)) {
+    if (Date.parse(date)) {
       res.status(200).json({
         unix: date.valueOf(),
         utc: date.toUTCString(),
