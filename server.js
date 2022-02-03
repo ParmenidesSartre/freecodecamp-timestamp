@@ -27,16 +27,18 @@ app.get("/api/:date?", function (req, res) {
       "unix": currentDate.valueOf(),
       "utc": currentDate.toUTCString()
     })
-  } else if (!Date.parse(req.params.date)) {
-    res.status(400).json({
-      "error": "Invalid Date"
-    })
   } else {
     const date = new Date(isNaN(req.params.date) ? req.params.date : parseInt(req.params.date));
+    if (!Date.parse(req.params.date)) {
+      res.status(400).json({
+        "error": "Invalid Date"
+      })
+    } else {
     res.status(200).json({
       "unix": date.valueOf(),
       "utc": date.toUTCString()
     })
+  }
   }
 });
 
